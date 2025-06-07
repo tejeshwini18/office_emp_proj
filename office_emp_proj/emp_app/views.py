@@ -31,7 +31,13 @@ def add_emp(request):
         new_emp.save()
         return HttpResponse('Employee added Successfully')
     elif request.method=='GET':
-        return render(request, 'add_emp.html')
+        departments = Department.objects.all()
+        roles = Role.objects.all()
+        context = {
+            'departments': departments,
+            'roles': roles
+        }
+        return render(request, 'add_emp.html', context)
     else:
         return HttpResponse("An Exception Occured! Employee Has Not Been Added")
 
